@@ -1,6 +1,9 @@
 #include "main.h"
 #include <stdarg.h>
 
+int str_print(char *string);
+int character(char c);
+
 /**
  * _printf - produces output according to a formart
  * @format: arguments passed
@@ -16,25 +19,31 @@ int _printf(const char *format, ...)
 	va_start(ap, format);
 
 	len = 0;
+	if (!format)
+	{
+		return (0);
+	}
+
 	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%' && format[i + 1] == 's')
 		{
 			str = va_arg(ap, char *);
-
-			for (j = 0; str[j] != '\0'; j++)
-			{
-				_putchar(str[j]);
-				len++;
-			}
+			len += str_print(str);
 			i += 2;
 		}
 
 		if (format[i] == '%' && format[i + 1] == 'c')
 		{
-			_putchar(va_arg(ap, int));
+			len += character(va_arg(ap, char));
+			i += 2;
+		}
+
+		if (format[i] == '%' && fornart[i + 1] == '%')
+		{
+			_putchar('%');
 			len++;
-			i++;
+			i += 2;
 		}
 
 		else
@@ -46,4 +55,22 @@ int _printf(const char *format, ...)
 
 	va_end(ap);
 	return (len);
+}
+
+
+int str_print(char *string)
+{
+	int k;
+
+	for (k = 0; string[k] != '\0'; k++)
+	{
+		_putchar(string[k]);
+	}
+	return (k);
+}
+
+int character(char c)
+{
+	_putchar(c);
+	return (1);
 }
