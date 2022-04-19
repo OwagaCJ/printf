@@ -13,7 +13,7 @@ int character(char c);
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	int i, j, len;
+	int i, len;
 	char *str;
 
 	va_start(ap, format);
@@ -35,15 +35,15 @@ int _printf(const char *format, ...)
 
 		if (format[i] == '%' && format[i + 1] == 'c')
 		{
-			len += character(va_arg(ap, char));
+			len += character(va_arg(ap, int));
 			i += 2;
 		}
 
-		if (format[i] == '%' && fornart[i + 1] == '%')
+		if (format[i] == '%' && format[i + 1] == '%')
 		{
 			_putchar('%');
 			len++;
-			i += 2;
+			i += 1;
 		}
 
 		else
@@ -57,7 +57,13 @@ int _printf(const char *format, ...)
 	return (len);
 }
 
-
+/**
+ * str_print - prints a string
+ *
+ * @string: a character array
+ *
+ * Return: length of string
+ */
 int str_print(char *string)
 {
 	int k;
@@ -69,6 +75,14 @@ int str_print(char *string)
 	return (k);
 }
 
+/**
+ * character - prints a character
+ *
+ * @c: character
+ *
+ * Return: 1 (length of character)
+ *
+ */
 int character(char c)
 {
 	_putchar(c);
