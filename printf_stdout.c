@@ -21,7 +21,6 @@ int _printf(const char *format, ...)
 	len = 0;
 	if (!format)
 		return (0);
-
 	for (i = 0; format[i] != '\0'; i++)
 	{
 		k = 1;
@@ -49,7 +48,11 @@ int _printf(const char *format, ...)
 			len++;
 			i += k;
 		}
-
+		if (format[i] == '%' && format[i + k] == '\0')
+		{
+			len = -1;
+			i += k - 1;
+		}
 		else
 		{
 			_putchar(format[i]);
