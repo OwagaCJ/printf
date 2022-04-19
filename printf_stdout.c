@@ -50,7 +50,6 @@ int _printf(const char *format, ...)
 		}
 		if (format[i] == '%' && format[i + k] == '\0')
 		{
-			len = -1;
 			i += k - 1;
 		}
 		else
